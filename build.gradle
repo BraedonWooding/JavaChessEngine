@@ -1,0 +1,34 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'org.openjfx:javafx-plugin:0.0.9'
+    }
+}
+
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+repositories {
+    mavenCentral()
+}
+
+group 'main.chess'
+
+apply plugin: 'org.openjfx.javafxplugin'
+apply plugin: 'java'
+
+mainClassName = 'main.chess.Main'
+sourceSets.main.java.srcDirs = ['src']
+
+sourceCompatibility = 1.8
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
