@@ -17,7 +17,7 @@ public class Main extends Application {
 		primaryStage.setTitle("Chess");
 		ChessState state = new ChessState();
 		ChessGame controller = new ChessGame(state);
-		ChessView view = new ChessView(state);
+		ChessView view = new ChessView(state, controller);
 
 		Scene scene = new Scene(view.getAsParent(), 800, 800);
 		primaryStage.setScene(scene);

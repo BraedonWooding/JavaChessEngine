@@ -5,16 +5,14 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import main.chess.ChessGame;
 import main.chess.ChessState;
 import main.chess.Main;
 
 public class ChessView {
-    private ChessState state;
     private BorderPane parent = new BorderPane();
 
-    public ChessView(ChessState state) {
-        this.state = state;
-
+    public ChessView(ChessState state, ChessGame game) {
         GridPane table = new GridPane();
         for (int i = 0; i < Main.CHESS_DIMENSIONS; i++) {
             table.add(createRowLabel(i), 0, i + 1, 1, 1);
@@ -23,10 +21,10 @@ public class ChessView {
             table.add(createColLabel(i), i + 1, 9, 1, 1);
         }
 
-        ChessBoard board = new ChessBoard(this.state);
+        ChessBoard board = new ChessBoard(state, game);
         table.add(board, 1, 1, 8, 8);
         table.setAlignment(Pos.CENTER);
-        board.render();
+        board.initialRender(state);
         parent.setCenter(table);
     }
 

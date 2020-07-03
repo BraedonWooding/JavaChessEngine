@@ -2,9 +2,9 @@ package main.chess.pieces;
 
 import java.util.List;
 
-import javafx.util.Pair;
 import main.chess.ChessState;
 import main.chess.Main;
+import main.chess.Vec2D;
 
 public class CardinalMovement implements IMovement {
     private int range;
@@ -15,14 +15,15 @@ public class CardinalMovement implements IMovement {
         this.piece = piece;
     }
 
-    public void getPositions(List<Pair<Integer, Integer>> list, ChessState state) {
+    public void getPositions(List<Vec2D> list, ChessState state) {
         boolean reachedPiece = false;
-        int x = piece.getX();
-        int y = piece.getY();
+        Vec2D pos = piece.getPos().get();
+        int x = pos.getX();
+        int y = pos.getY();
         for (int i = 1; i <= range && !reachedPiece; i++) {
             if (x + i < Main.CHESS_DIMENSIONS) {
                 Piece piece = state.getPiece(x + i, y);
-                list.add(new Pair<>(x + i, y));
+                list.add(new Vec2D(x + i, y));
                 if (piece != null) reachedPiece = true;
             }
         }
@@ -31,7 +32,7 @@ public class CardinalMovement implements IMovement {
         for (int i = 1; i <= range && !reachedPiece; i++) {
             if (x - i >= 0) {
                 Piece piece = state.getPiece(x - i, y);
-                list.add(new Pair<>(x - i, y));
+                list.add(new Vec2D(x - i, y));
                 if (piece != null) reachedPiece = true;
             }
         }
@@ -40,7 +41,7 @@ public class CardinalMovement implements IMovement {
         for (int i = 1; i <= range && !reachedPiece; i++) {
             if (y + i < Main.CHESS_DIMENSIONS) {
                 Piece piece = state.getPiece(x, y + i);
-                list.add(new Pair<>(x, y + i));
+                list.add(new Vec2D(x, y + i));
                 if (piece != null) reachedPiece = true;
             }
         }
@@ -49,7 +50,7 @@ public class CardinalMovement implements IMovement {
         for (int i = 1; i <= range && !reachedPiece; i++) {
             if (y - i >= 0) {
                 Piece piece = state.getPiece(x, y - i);
-                list.add(new Pair<>(x, y - i));
+                list.add(new Vec2D(x, y - i));
                 if (piece != null) reachedPiece = true;
             }
         }

@@ -1,5 +1,8 @@
 package main.chess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import main.chess.pieces.Bishop;
 import main.chess.pieces.King;
 import main.chess.pieces.Knight;
@@ -10,35 +13,56 @@ import main.chess.pieces.Rook;
 
 public class ChessState {
     private Piece[][] board = new Piece[Main.CHESS_DIMENSIONS][Main.CHESS_DIMENSIONS];
+    private King whiteKing;
+    private King blackKing;
 
     public ChessState() {
-        board[0][0]= new Rook("black", 0, 0);
-        board[1][0]= new Knight("black", 1, 0);
-        board[2][0]= new Bishop("black", 2, 0);
-        board[3][0]= new Queen("black", 3, 0);
-        board[4][0]= new King("black", 4, 0);
-        board[5][0]= new Bishop("black", 5, 0);
-        board[6][0]= new Knight("black", 6, 0);
-        board[7][0]= new Rook("black", 7, 0);
+        board[0][0] = new Rook("black", new Vec2D(0, 0));
+        board[1][0] = new Knight("black", new Vec2D(1, 0));
+        board[2][0] = new Bishop("black", new Vec2D(2, 0));
+        board[3][0] = new Queen("black", new Vec2D(3, 0));
+        board[4][0] = blackKing = new King("black", new Vec2D(4, 0));
+        board[5][0] = new Bishop("black", new Vec2D(5, 0));
+        board[6][0] = new Knight("black", new Vec2D(6, 0));
+        board[7][0] = new Rook("black", new Vec2D(7, 0));
 
         for (int i = 0; i < 8; i++) {
-            board[i][1] = new Pawn("black", i, 1);
-            board[i][6] = new Pawn("white", i, 6);
+            board[i][1] = new Pawn("black", new Vec2D(i, 1));
+            board[i][6] = new Pawn("white", new Vec2D(i, 6));
         }
 
-        board[0][7]= new Rook("white", 0, 7);
-        board[1][7]= new Knight("white", 1, 7);
-        board[2][7]= new Bishop("white", 2, 7);
-        board[3][7]= new Queen("white", 3, 7);
-        board[4][7]= new King("white", 4, 7);
-        board[5][7]= new Bishop("white", 5, 7);
-        board[6][7]= new Knight("white", 6, 7);
-        board[7][7]= new Rook("white", 7, 7);
+        board[0][7] = new Rook("white", new Vec2D(0, 7));
+        board[1][7] = new Knight("white", new Vec2D(1, 7));
+        board[2][7] = new Bishop("white", new Vec2D(2, 7));
+        board[3][7] = new Queen("white", new Vec2D(3, 7));
+        board[4][7] = whiteKing = new King("white", new Vec2D(4, 7));
+        board[5][7] = new Bishop("white", new Vec2D(5, 7));
+        board[6][7] = new Knight("white", new Vec2D(6, 7));
+        board[7][7] = new Rook("white", new Vec2D(7, 7));
     }
 
-    public void movePiece(int x, int y, int newX, int newY) {
-        board[newX][newY] = board[x][y];
-        board[x][y] = null;
+    public List<Vec2D> enemyPositions(boolean isWhite) {
+        List<Vec2D> positions = new ArrayList<Vec2D>();
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++) {
+                Piece piece = getPiece(x, y);
+                if (piece != null && piece.getColor() == (isWhite ? "black" : "white")) {
+                    positions.addAll(piece.getPositions(this));
+                }
+            }
+        }
+        return positions;
+    }
+
+    public King getKing(boolean isWhite) {
+        return isWhite ? whiteKing : blackKing;
+    }
+
+    public void pieceListener(Vec2D oldPos, Vec2D newPos) {
+        if (newPos != null) {
+            board[newPos.getX()][newPos.getY()] = board[oldPos.getX()][oldPos.getY()];
+        }
+        board[oldPos.getX()][oldPos.getY()] = null;
     }
 
     public Piece getPiece(int x, int y) {

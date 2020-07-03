@@ -1,7 +1,8 @@
 package main.chess.pieces;
+import main.chess.Vec2D;
 
 public class Knight extends Piece {
-    public Knight(String color, int x, int y) {
-        super(color, x, y);
+    public Knight(String color, Vec2D vec) {
+        super(color, vec);
     }
 }

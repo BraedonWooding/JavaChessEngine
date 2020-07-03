@@ -3,40 +3,27 @@ package main.chess.pieces;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.util.Pair;
 import main.chess.ChessState;
+import main.chess.Vec2D;
+import main.chess.Observable;
 
 public class Piece {
     private String color;
     private List<IMovement> behaviours;
-    private int x;
-    private int y;
+    private Observable<Vec2D> vec;
 
-    public Piece(String color, int x, int y) {
+    public Piece(String color, Vec2D vec) {
         this.color = color;
         this.behaviours = new ArrayList<>();
-        this.setX(x);
-        this.setY(y);
+        this.vec = new Observable<>(vec);
     }
 
     protected void addBehaviour(IMovement behaviour) {
         this.behaviours.add(behaviour);
     }
 
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
+    public Observable<Vec2D> getPos() {
+        return this.vec;
     }
 
     public String getName() {
@@ -51,11 +38,11 @@ public class Piece {
         return this.color;
     }
 
-    public List<Pair<Integer, Integer>> getPositions(ChessState state) {
-        List<Pair<Integer, Integer>> list = new ArrayList<>();
+    public List<Vec2D> getPositions(ChessState state) {
+        List<Vec2D> list = new ArrayList<>();
         this.behaviours.forEach(o -> o.getPositions(list, state));
         list.removeIf(o -> {
-            Piece piece = state.getPiece(o.getKey(), o.getValue());
+            Piece piece = state.getPiece(o.getX(), o.getY());
             if (piece != null && piece.getColor() == this.getColor()) return true;
 
             // ... remove the king pieces and stuff like that
