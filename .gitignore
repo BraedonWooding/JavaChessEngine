@@ -2,7 +2,6 @@
 *.log
 hs_err_pid*
 /bin/
-/lib/
 
 .gradle
 **/build/
