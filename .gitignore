@@ -8,7 +8,7 @@ lib/
 **/build/
 !src/**/build/
 
-.classpath
+/.classpath
 
 # Ignore Gradle GUI config
 gradle-app.setting
