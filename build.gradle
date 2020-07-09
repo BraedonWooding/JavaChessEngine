@@ -23,6 +23,7 @@ group 'main.chess'
 
 apply plugin: 'org.openjfx.javafxplugin'
 apply plugin: 'java'
+apply plugin: 'eclipse'
 
 mainClassName = 'main.chess.Main'
 sourceSets.main.java.srcDirs = ['src']

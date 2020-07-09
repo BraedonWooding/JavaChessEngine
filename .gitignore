@@ -1,12 +1,14 @@
 *.class
 *.log
 hs_err_pid*
-/bin/
-/lib/
+bin/
+lib/
 
 .gradle
 **/build/
 !src/**/build/
+
+.classpath
 
 # Ignore Gradle GUI config
 gradle-app.setting

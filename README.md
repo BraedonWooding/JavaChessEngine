@@ -11,7 +11,10 @@ You can find it [here](https://gradle.org/install/).
 Then all you need to run is;
 
 ```bash
-./gradlew run
+gradle eclipse
+gradle run
 ```
+
+> NOTE: You may also have to clean the java (`> java: clean the workspace` command) after runnign the eclipse to get it to recognise javafx.
 
 > Hopefully!
