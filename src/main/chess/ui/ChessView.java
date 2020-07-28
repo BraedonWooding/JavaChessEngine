@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import main.chess.ChessGame;
 import main.chess.ChessState;
 import main.chess.Main;
@@ -34,6 +35,7 @@ public class ChessView {
 
     private Label createRowLabel(int i) {
         Label label = new Label(Integer.toString(8 - i));
+        label.setFont(Font.font("Arial", 30));
         label.setMinSize(20, 50);
         label.setAlignment(Pos.CENTER);
         return label;
@@ -41,6 +43,7 @@ public class ChessView {
 
     private Label createColLabel(int i) {
         Label label = new Label(Character.toString(i + 'A'));
+        label.setFont(Font.font("Arial", 30));
         label.setMinSize(50, 20);
         label.setAlignment(Pos.CENTER);
         return label;
