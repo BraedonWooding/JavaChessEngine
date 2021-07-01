@@ -15,6 +15,6 @@ gradle eclipse
 gradle run
 ```
 
-> NOTE: You may also have to clean the java (`> java: clean the workspace` command) after runnign the eclipse to get it to recognise javafx.
+> NOTE: You may also have to clean the java (`> java: clean the workspace` command) after running the eclipse to get it to recognise javafx.
 
 > Hopefully!
